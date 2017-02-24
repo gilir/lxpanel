@@ -59,6 +59,7 @@ pkglib_LTLIBRARIES = $(DYNAMIC_PLUGINS)
 
 EXTRA_LTLIBRARIES = \
 	batt.la \
+	bluetooth.la \
 	cpu.la \
 	cpufreq.la \
 	deskno.la \
@@ -79,6 +80,11 @@ batt_la_SOURCES = \
 	batt/batt.c \
 	batt/batt_sys.c
 batt_la_CFLAGS = -I$(srcdir)/batt
+
+# bluetooth
+bluetooth_la_SOURCES = \
+	bluetooth/bluetooth.c
+bluetooth_la_CFLAGS = -DPACKAGE_DATA_DIR=\""$(datadir)/lxpanel"\" -I$(srcdir)/bluetooth
 
 # cpu
 cpu_la_SOURCES = cpu/cpu.c

@@ -42,6 +42,8 @@ plugins/netstatus/netstatus-util.c
 
 plugins/batt/batt.c
 
+plugins/bluetooth/bluetooth.c
+
 plugins/kbled/kbled.c
 
 plugins/indicator/indicator.c
