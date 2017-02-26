@@ -63,6 +63,7 @@ EXTRA_LTLIBRARIES = \
 	cpu.la \
 	cpufreq.la \
 	deskno.la \
+	dhcpcdui.la \
 	indicator.la \
 	kbled.la \
 	monitors.la \
@@ -94,6 +95,17 @@ cpufreq_la_SOURCES = cpufreq/cpufreq.c
 
 # deskno
 deskno_la_SOURCES = deskno/deskno.c
+
+# dhcpcdui
+dhcpcdui_la_SOURCES = \
+	dhcpcd-gtk/main.c \
+	dhcpcd-gtk/menu.c \
+	dhcpcd-gtk/prefs.c \
+	dhcpcd-gtk/wpa.c \
+	libdhcpcd/dhcpcd.c \
+	libdhcpcd/config.c \
+	libdhcpcd/wpa.c
+dhcpcdui_la_CFLAGS = -DPACKAGE_DATA_DIR=\""$(datadir)/lxpanel"\" -I$(srcdir)/dhcpcd-gtk  -I$(srcdir)/libdhcpcd
 
 # indicator
 indicator_la_SOURCES = indicator/indicator.c

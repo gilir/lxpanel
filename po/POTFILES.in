@@ -44,6 +44,11 @@ plugins/batt/batt.c
 
 plugins/bluetooth/bluetooth.c
 
+plugins/dhcpcd-gtk/main.c
+plugins/dhcpcd-gtk/menu.c
+plugins/dhcpcd-gtk/prefs.c
+plugins/dhcpcd-gtk/wpa.c
+
 plugins/kbled/kbled.c
 
 plugins/indicator/indicator.c

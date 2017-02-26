@@ -195,6 +195,7 @@ plugin_cpu=
 plugin_deskno=
 plugin_batt=
 plugin_bluetooth=
+plugin_dhcpcdui=
 plugin_xkb=
 plugin_kbled=
 plugin_thermal=
@@ -210,7 +211,7 @@ AC_ARG_WITH(plugins,
 [                         plugins prefixed with '-' are not built]
 [                         Possible plugins are: ]
 [                         netstatus, netstat, volume, cpu, deskno, batt, bluetooth, kbled,]
-[                         xkb, thermal, cpufreq, monitors, indicator, weather]
+[                         dhcpcdui, xkb, thermal, cpufreq, monitors, indicator, weather]
 , plugins="$withval",[plugins="all"])
 
 if test x"$plugins" != xall -a x"$plugins" != xnone; then
@@ -220,7 +221,7 @@ if test x"$plugins" != xall -a x"$plugins" != xnone; then
     fi
 fi
 
-ALL_PLUGINS_LIST="netstatus netstat volume volumealsa cpu deskno batt bluetooth kbled xkb thermal cpufreq monitors indicator weather"
+ALL_PLUGINS_LIST="netstatus netstat volume volumealsa cpu deskno batt bluetooth dhcpcdui kbled xkb thermal cpufreq monitors indicator weather"
 
 AC_DEFUN([check_plugin_name],[
     plugin_found=false
@@ -289,6 +290,7 @@ PLUGINS_LIST="\
     $plugin_deskno \
     $plugin_batt \
     $plugin_bluetooth \
+    $plugin_dhcpcdui \
     $plugin_kbled \
     $plugin_xkb \
     $plugin_thermal \
@@ -391,6 +393,12 @@ then
     sysconfdir=/etc
 fi
 
+# defines for dhcpcdui plugin
+AC_DEFINE([HAS_GETTEXT], [1], [Has gettext function])
+AC_DEFINE([HAVE_STRVERSCMP], [1], [Has strversmp function])
+AC_DEFINE([strlcpy(dst, src, n)],[((size_t)snprintf(dst, n, "%s", src))],[Replacement strlcpy function])
+AC_DEFINE([BG_SCAN], [1], [Perform regular network scans])
+
 AC_CONFIG_FILES([
     lxpanel.pc
     Makefile
@@ -435,6 +443,9 @@ echo Building dynamic plugins:
     fi
     if test x"$plugin_bluetooth" != x; then
         AC_MSG_RESULT([    bluetooth - Manages Bluetooth devices])
+    fi
+    if test x"$plugin_dhcpcdui" != x; then
+        AC_MSG_RESULT([    dhcpcdui - WiFi network interface])
     fi
     if test x"$plugin_kbled" != x; then
         AC_MSG_RESULT([    kbled - Indicator for CapsLock, NumLock, and ScrLock])
